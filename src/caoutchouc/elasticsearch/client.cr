@@ -7,6 +7,15 @@ module Caoutchouc
     class Client
       getter :location, :secondary_locations
 
+      def initialize()
+        if ENV.has_key?("CAOUTCHOUC_ES_LOCATION")
+          @location = ENV["CAOUTCHOUC_ES_LOCATION"]
+        else
+          @location = "http://localhost:9200"
+        end
+        @secondary_locations = [] of String
+      end
+
       def initialize(addresses : String | Array(String))
         addresses = [addresses] if addresses.is_a?(String)
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -eo pipefail
 shopt -s nullglob
 
 version=1.7.0
@@ -27,6 +27,12 @@ while :; do
   fi
   sleep 1
 done
+
+if ! test -z "$DOCKER_HOST"; then
+  echo "* Docker doesn't run locally, setting CAOUTCHOUC_ES_LOCATION"
+  export CAOUTCHOUC_ES_LOCATION=$(echo $DOCKER_HOST | perl -pe 's#^tcp://#http://#,s#:\d+#:9200#')
+  echo $CAOUTCHOUC_ES_LOCATION
+fi
 
 echo "* Running tests"
 crystal spec

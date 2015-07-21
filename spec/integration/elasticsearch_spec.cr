@@ -1,4 +1,4 @@
-client = ESClient.new("http://localhost:9200")
+client = ESClient.new
 
 describe Caoutchouc::Elasticsearch::Client do
   describe "#health" do
