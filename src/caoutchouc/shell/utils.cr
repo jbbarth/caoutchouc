@@ -7,9 +7,7 @@ module Caoutchouc
       end
 
       def prompt
-        # flush previously non-flushed message
-        STDOUT.flush
-        print! "> "
+        "> "
       end
 
       def erase_current_line

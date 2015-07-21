@@ -1,3 +1,4 @@
+require "readline"
 require "./shell/*"
 
 module Caoutchouc
@@ -7,13 +8,20 @@ module Caoutchouc
     def main_loop
       puts! welcome_message
       loop do
-        prompt
-        begin
-          input = read_line
-        rescue IO::EOFError #Ctrl+D
-          puts! "exit"
+        input = Readline.readline(prompt)
+
+        # Ctrl-D
+        if input.nil?
+          erase_current_line
+          puts! "#{prompt}exit"
           exit
         end
+        # let the compiler know we're sure we have a string now,
+        # so it doesn't break on next lines (input.split <<)
+        input = input as String
+
+        next if input == ""
+
         command = input.split.first
         case command
         when "help"
