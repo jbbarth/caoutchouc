@@ -4,8 +4,6 @@ module Caoutchouc
   class CLI
     include Shell
 
-    getter :client
-
     def initialize(args)
       debug "Observing cluster at: #{args.inspect}"
       if args.size == 0
@@ -14,7 +12,6 @@ module Caoutchouc
         STDERR.flush
         exit 1
       end
-      @client = Elasticsearch::Client.new(args)
       main_loop()
     end
   end

@@ -9,6 +9,7 @@ module Caoutchouc
     def main_loop
       initialize_autocomplete!
       puts! welcome_message
+
       loop do
         input = Readline.readline(prompt)
 
@@ -18,23 +19,20 @@ module Caoutchouc
           puts! "#{prompt}exit"
           exit
         end
+
         # let the compiler know we're sure we have a string now,
         # so it doesn't break on next lines (input.split <<)
         input = input as String
 
+        # empty input
         next if input == ""
 
-        command = input.split.first
-        case command
-        when "help"
-          puts! "info     -- GET / : displays basic cluster informations"
-          puts! "status   -- GET /_cluster/health : displays cluster health"
-        when "info"
-          puts! @client.info.to_pretty_json
-        when "status"
-          puts! @client.health.pretty_to_json
+        # here we have a command to work on
+        command_name = input.split.first
+        if command = Command.find(command_name)
+          command.run
         else
-          puts! "Unrecognized command: #{command}"
+          puts! "Unrecognized command: #{command_name}"
         end
       end
     end
@@ -52,6 +50,10 @@ module Caoutchouc
       msg << ""
       msg << ""
       msg.join("\n")
+    end
+
+    def client
+      Elasticsearch.client
     end
   end
 end

@@ -4,7 +4,12 @@ require "http/client"
 
 module Caoutchouc
   module Elasticsearch
+    def self.client
+      @@client = Elasticsearch::Client.new
+    end
+
     class Client
+
       getter :location, :secondary_locations
 
       def initialize()
@@ -41,10 +46,6 @@ module Caoutchouc
         else
           error("Failed to retrieve info")
         end
-      end
-
-      private def client
-        @client ||= HTTP::Client.new(location)
       end
 
       private def get(endpoint)
