@@ -4,8 +4,10 @@ require "./shell/*"
 module Caoutchouc
   module Shell
     include Utils
+    include Autocomplete
 
     def main_loop
+      initialize_autocomplete!
       puts! welcome_message
       loop do
         input = Readline.readline(prompt)
