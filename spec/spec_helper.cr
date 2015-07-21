@@ -2,5 +2,9 @@ require "spec"
 require "./utils"
 require "../src/caoutchouc/**"
 
-# convenience aliases
+# convenience aliases & methods
 ESClient = Caoutchouc::Elasticsearch::Client
+
+def client
+  $client ||= ESClient.new
+end

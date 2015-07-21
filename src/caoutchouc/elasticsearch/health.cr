@@ -16,7 +16,7 @@ module Caoutchouc
         unassigned_shards: {type: Int32},
       })
 
-      def colorized_to_json
+      def pretty_to_json
         result = to_pretty_json
         if status == "green"
           color = :green

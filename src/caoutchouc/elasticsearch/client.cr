@@ -23,9 +23,9 @@ module Caoutchouc
         @secondary_locations = addresses
       end
 
-      def health
+      def health : Health
         #TODO: catch the case where we cannot connect
-        result = HTTP::Client.get("#{location}/_cluster/health")
+        result = get("/_cluster/health")
         if result.status_code == 200
           Health.from_json(result.body)
         else
@@ -33,12 +33,22 @@ module Caoutchouc
         end
       end
 
-      def pretty_health
-        health.colorized_to_json
+      def info : Info
+        #TODO: catch the case where we cannot connect
+        result = get("/")
+        if result.status_code == 200
+          Info.from_json(result.body)
+        else
+          error("Failed to retrieve info")
+        end
       end
 
       private def client
         @client ||= HTTP::Client.new(location)
+      end
+
+      private def get(endpoint)
+        HTTP::Client.get("#{location}#{endpoint}")
       end
     end
   end

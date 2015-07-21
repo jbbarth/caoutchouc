@@ -4,6 +4,31 @@ module Caoutchouc
   module Shell
     include Utils
 
+    def main_loop
+      puts! welcome_message
+      loop do
+        prompt
+        begin
+          input = read_line
+        rescue IO::EOFError #Ctrl+D
+          puts! "exit"
+          exit
+        end
+        command = input.split.first
+        case command
+        when "help"
+          puts! "info     -- GET / : displays basic cluster informations"
+          puts! "status   -- GET /_cluster/health : displays cluster health"
+        when "info"
+          puts! @client.info.to_pretty_json
+        when "status"
+          puts! @client.health.pretty_to_json
+        else
+          puts! "Unrecognized command: #{command}"
+        end
+      end
+    end
+
     def welcome_message
       msg = [] of String
       msg << ""
@@ -13,7 +38,7 @@ module Caoutchouc
       msg << ""
       msg << "Current state is:"
       msg << ""
-      msg << client.pretty_health.gsub(/(^|\n)/) { |s, m| "#{m[1]}    " }
+      msg << client.health.pretty_to_json.gsub(/(^|\n)/) { |s, m| "#{m[1]}    " }
       msg << ""
       msg << ""
       msg.join("\n")

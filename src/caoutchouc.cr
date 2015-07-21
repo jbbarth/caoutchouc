@@ -17,21 +17,6 @@ module Caoutchouc
       @client = Elasticsearch::Client.new(args)
       main_loop()
     end
-
-    def main_loop
-      puts! welcome_message
-      loop do
-        prompt
-        begin
-          input = read_line
-        rescue IO::EOFError #Ctrl+D
-          puts! "exit"
-          exit
-        end
-        puts! "You typed #{input}"
-      end
-    end
-
   end
 end
 
