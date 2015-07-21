@@ -1,2 +1,5 @@
 require "spec"
-require "../src/caoutchouc/*"
+require "../src/caoutchouc/**"
+
+# convenience aliases
+ESClient = Caoutchouc::Elasticsearch::Client

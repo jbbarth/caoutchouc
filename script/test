@@ -1,0 +1,32 @@
+#!/bin/bash
+set -euo pipefail
+shopt -s nullglob
+
+version=1.7.0
+
+echo "* Checking prerequisites"
+if ! which docker >/dev/null; then
+  echo "You need to have 'docker' installed to run the integration tests" >&2
+  exit 1
+fi
+
+echo "* Stopping any 'caoutchouc-elasticsearch' container"
+docker stop caoutchouc-elasticsearch 2>/dev/null || echo "nothing to stop"
+docker rm caoutchouc-elasticsearch 2>/dev/null || echo "nothing to remove"
+
+echo "* Starting a new 'caoutchouc-elasticsearch' container (v$version)"
+id=$(docker run --name=caoutchouc-elasticsearch -d -p 9200:9200 elasticsearch:$version)
+
+echo "* Waiting for the ES cluster to start"
+while :; do
+  echo -n .
+  if docker logs $id|grep -E 'started$' >/dev/null; then
+    echo "started!"
+    sleep 2
+    break
+  fi
+  sleep 1
+done
+
+echo "* Running tests"
+crystal spec
