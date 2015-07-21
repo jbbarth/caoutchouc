@@ -9,7 +9,11 @@ There will soon be binary packages, but for now you have to compile the project
 yourself:
 1. [install crystal](http://crystal-lang.org/docs/installation/index.html)
 2. clone this repository and go into the resulting directory
-3. compile a binary: `crystal compile src/caoutchouc.cr`
+3. compile a binary:
+```
+mkdir -p ~/bin
+crystal build src/caoutchouc.cr -o ~/bin/caoutchouc
+```
 
 ## Usage
 
