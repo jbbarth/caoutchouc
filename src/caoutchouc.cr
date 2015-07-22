@@ -1,3 +1,4 @@
+require "./patches/**"
 require "./caoutchouc/**"
 
 module Caoutchouc

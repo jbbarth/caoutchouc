@@ -1,5 +1,6 @@
 require "spec"
 require "./utils"
+require "../src/patches/**"
 require "../src/caoutchouc/**"
 
 # convenience aliases & methods

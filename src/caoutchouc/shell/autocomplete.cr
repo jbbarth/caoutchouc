@@ -1,15 +1,16 @@
 module Caoutchouc
   module Shell
     class Autocomplete
-      getter :text, :buffer
+      getter :text, :start, :finish, :buffer
 
       def self.initialize_autocomplete!
-        Readline.autocomplete do |text|
-          new(text).complete
+        Readline.autocomplete do |text, start, finish|
+          new(text, start: start, finish: finish).complete
         end
       end
 
-      def initialize(@text, @buffer = Readline.line_buffer)
+      def initialize(@text, @start = 0, @finish = 0, @buffer = nil)
+        @buffer ||= Readline.line_buffer
       end
 
       def complete : Array(String)
@@ -37,12 +38,8 @@ module Caoutchouc
         return [] of String
       end
 
-      # This is not perfect but for now, crystal autocomplete binding does not
-      # yield "start" and "finish" positions, so we have to guess what to do
-      # depending on yielded text and line buffer
-      # TODO: explain that upstream and make a PR
       private def beginning_of_line?
-        text == buffer
+        start == 0
       end
 
       private def find_command : Command|Nil
