@@ -1,7 +1,7 @@
-Caoutchouc: a tool for managing and monitoring your ES cluster
-==============================================================
+Caoutchouc: a shell for managing Elasticsearch
+==============================================
 
-`caoutchouc` is an shell specifically targeted at managing ElasticSearch.
+`caoutchouc` is an interactive shell specifically targeted at managing Elasticsearch.
 
 ## Installation
 
@@ -20,6 +20,8 @@ crystal build src/caoutchouc.cr -o ~/bin/caoutchouc
 ```
 caoutchouc <address>
 ```
+
+Then `help` for commands.
 
 ## Contributing
 
