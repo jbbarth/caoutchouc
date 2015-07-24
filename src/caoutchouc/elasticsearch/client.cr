@@ -4,8 +4,13 @@ require "http/client"
 
 module Caoutchouc
   module Elasticsearch
+    @@location = nil
+
+    def self.set_location(@@location)
+    end
+
     def self.client
-      @@client = Elasticsearch::Client.new
+      @@client ||= Elasticsearch::Client.new(@@location)
     end
 
     class Client
@@ -19,6 +24,10 @@ module Caoutchouc
           @location = "http://localhost:9200"
         end
         @secondary_locations = [] of String
+      end
+
+      def initialize(nil)
+        initialize
       end
 
       def initialize(addresses : String | Array(String))
