@@ -57,6 +57,20 @@ module Caoutchouc
         end
       end
 
+      def cluster_state : ClusterState
+        #TODO: catch the case where we cannot connect
+        result = get("/_cluster/state")
+        if result.status_code == 200
+          ClusterState.from_json(result.body)
+        else
+          error("Failed to retrieve cluster state")
+        end
+      end
+
+      def nodes : Hash(String, ClusterStateNode)
+        cluster_state.nodes
+      end
+
       private def get(endpoint)
         HTTP::Client.get("#{location}#{endpoint}")
       end
