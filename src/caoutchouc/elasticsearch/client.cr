@@ -71,6 +71,16 @@ module Caoutchouc
         cluster_state.nodes
       end
 
+      def settings : Settings
+        #TODO: catch the case where we cannot connect
+        result = get("/_cluster/settings")
+        if result.status_code == 200
+          Settings.from_json(result.body)
+        else
+          error("Failed to retrieve cluster settings")
+        end
+      end
+
       private def get(endpoint)
         HTTP::Client.get("#{location}#{endpoint}")
       end
