@@ -18,8 +18,18 @@ module Caoutchouc
       json_mapping({
         name: {type: String},
         transport_address: {type: String},
-        attributes: {type: JSON::Any}, # TODO
+        attributes: {type: Hash(String, String)}, # TODO
       })
+
+      def master?
+        attributes.has_key?("master") && attributes["master"] == "true"
+      end
+
+      def data?
+        # only nodes with data=false have this attribute exposed via the
+        # cluster state API it seems...
+        !attributes.has_key?("data") || attributes["data"] != "false"
+      end
     end
 
     class ClusterStateMetadata
