@@ -1,0 +1,234 @@
+{
+  "cluster_name" : "elasticsearch",
+  "version" : 5,
+  "master_node" : "n4rG517nQJahqtr_cdVbNg",
+  "blocks" : { },
+  "nodes" : {
+    "n4rG517nQJahqtr_cdVbNg" : {
+      "name" : "Dr. Otto Octavius",
+      "transport_address" : "inet[/172.17.0.12:9300]",
+      "attributes" : { }
+    }
+  },
+  "metadata" : {
+    "templates" : { },
+    "indices" : {
+      "foo" : {
+        "state" : "open",
+        "settings" : {
+          "index" : {
+            "creation_date" : "1437737389440",
+            "number_of_shards" : "5",
+            "number_of_replicas" : "1",
+            "version" : {
+              "created" : "1070099"
+            },
+            "uuid" : "47r1QrVzSFuaEwBVO8Fwpw"
+          }
+        },
+        "mappings" : { },
+        "aliases" : [ ]
+      }
+    }
+  },
+  "routing_table" : {
+    "indices" : {
+      "foo" : {
+        "shards" : {
+          "2" : [ {
+            "state" : "STARTED",
+            "primary" : true,
+            "node" : "n4rG517nQJahqtr_cdVbNg",
+            "relocating_node" : null,
+            "shard" : 2,
+            "index" : "foo"
+          }, {
+            "state" : "UNASSIGNED",
+            "primary" : false,
+            "node" : null,
+            "relocating_node" : null,
+            "shard" : 2,
+            "index" : "foo",
+            "unassigned_info" : {
+              "reason" : "INDEX_CREATED",
+              "at" : "2015-07-24T11:29:49.596Z"
+            }
+          } ],
+          "0" : [ {
+            "state" : "STARTED",
+            "primary" : true,
+            "node" : "n4rG517nQJahqtr_cdVbNg",
+            "relocating_node" : null,
+            "shard" : 0,
+            "index" : "foo"
+          }, {
+            "state" : "UNASSIGNED",
+            "primary" : false,
+            "node" : null,
+            "relocating_node" : null,
+            "shard" : 0,
+            "index" : "foo",
+            "unassigned_info" : {
+              "reason" : "INDEX_CREATED",
+              "at" : "2015-07-24T11:29:49.596Z"
+            }
+          } ],
+          "3" : [ {
+            "state" : "STARTED",
+            "primary" : true,
+            "node" : "n4rG517nQJahqtr_cdVbNg",
+            "relocating_node" : null,
+            "shard" : 3,
+            "index" : "foo"
+          }, {
+            "state" : "UNASSIGNED",
+            "primary" : false,
+            "node" : null,
+            "relocating_node" : null,
+            "shard" : 3,
+            "index" : "foo",
+            "unassigned_info" : {
+              "reason" : "INDEX_CREATED",
+              "at" : "2015-07-24T11:29:49.596Z"
+            }
+          } ],
+          "1" : [ {
+            "state" : "STARTED",
+            "primary" : true,
+            "node" : "n4rG517nQJahqtr_cdVbNg",
+            "relocating_node" : null,
+            "shard" : 1,
+            "index" : "foo"
+          }, {
+            "state" : "UNASSIGNED",
+            "primary" : false,
+            "node" : null,
+            "relocating_node" : null,
+            "shard" : 1,
+            "index" : "foo",
+            "unassigned_info" : {
+              "reason" : "INDEX_CREATED",
+              "at" : "2015-07-24T11:29:49.596Z"
+            }
+          } ],
+          "4" : [ {
+            "state" : "STARTED",
+            "primary" : true,
+            "node" : "n4rG517nQJahqtr_cdVbNg",
+            "relocating_node" : null,
+            "shard" : 4,
+            "index" : "foo"
+          }, {
+            "state" : "UNASSIGNED",
+            "primary" : false,
+            "node" : null,
+            "relocating_node" : null,
+            "shard" : 4,
+            "index" : "foo",
+            "unassigned_info" : {
+              "reason" : "INDEX_CREATED",
+              "at" : "2015-07-24T11:29:49.596Z"
+            }
+          } ]
+        }
+      }
+    }
+  },
+  "routing_nodes" : {
+    "unassigned" : [ {
+      "state" : "UNASSIGNED",
+      "primary" : false,
+      "node" : null,
+      "relocating_node" : null,
+      "shard" : 2,
+      "index" : "foo",
+      "unassigned_info" : {
+        "reason" : "INDEX_CREATED",
+        "at" : "2015-07-24T11:29:49.596Z"
+      }
+    }, {
+      "state" : "UNASSIGNED",
+      "primary" : false,
+      "node" : null,
+      "relocating_node" : null,
+      "shard" : 0,
+      "index" : "foo",
+      "unassigned_info" : {
+        "reason" : "INDEX_CREATED",
+        "at" : "2015-07-24T11:29:49.596Z"
+      }
+    }, {
+      "state" : "UNASSIGNED",
+      "primary" : false,
+      "node" : null,
+      "relocating_node" : null,
+      "shard" : 3,
+      "index" : "foo",
+      "unassigned_info" : {
+        "reason" : "INDEX_CREATED",
+        "at" : "2015-07-24T11:29:49.596Z"
+      }
+    }, {
+      "state" : "UNASSIGNED",
+      "primary" : false,
+      "node" : null,
+      "relocating_node" : null,
+      "shard" : 1,
+      "index" : "foo",
+      "unassigned_info" : {
+        "reason" : "INDEX_CREATED",
+        "at" : "2015-07-24T11:29:49.596Z"
+      }
+    }, {
+      "state" : "UNASSIGNED",
+      "primary" : false,
+      "node" : null,
+      "relocating_node" : null,
+      "shard" : 4,
+      "index" : "foo",
+      "unassigned_info" : {
+        "reason" : "INDEX_CREATED",
+        "at" : "2015-07-24T11:29:49.596Z"
+      }
+    } ],
+    "nodes" : {
+      "n4rG517nQJahqtr_cdVbNg" : [ {
+        "state" : "STARTED",
+        "primary" : true,
+        "node" : "n4rG517nQJahqtr_cdVbNg",
+        "relocating_node" : null,
+        "shard" : 2,
+        "index" : "foo"
+      }, {
+        "state" : "STARTED",
+        "primary" : true,
+        "node" : "n4rG517nQJahqtr_cdVbNg",
+        "relocating_node" : null,
+        "shard" : 0,
+        "index" : "foo"
+      }, {
+        "state" : "STARTED",
+        "primary" : true,
+        "node" : "n4rG517nQJahqtr_cdVbNg",
+        "relocating_node" : null,
+        "shard" : 3,
+        "index" : "foo"
+      }, {
+        "state" : "STARTED",
+        "primary" : true,
+        "node" : "n4rG517nQJahqtr_cdVbNg",
+        "relocating_node" : null,
+        "shard" : 1,
+        "index" : "foo"
+      }, {
+        "state" : "STARTED",
+        "primary" : true,
+        "node" : "n4rG517nQJahqtr_cdVbNg",
+        "relocating_node" : null,
+        "shard" : 4,
+        "index" : "foo"
+      } ]
+    }
+  },
+  "allocations" : [ ]
+}
