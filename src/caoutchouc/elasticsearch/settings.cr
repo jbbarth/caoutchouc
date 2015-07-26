@@ -6,14 +6,16 @@ module Caoutchouc
       end
 
       def initialize(@json : Hash)
+        @json["persistent"] ||= Hash(String, JSON::Type).new
+        @json["transient"] ||= Hash(String, JSON::Type).new
       end
 
-      def persistent
-        @json["persistent"]
+      def persistent : Hash
+        @json["persistent"] as Hash
       end
 
-      def transient
-        @json["transient"]
+      def transient : Hash
+        @json["transient"] as Hash
       end
 
       def to_pretty_json
