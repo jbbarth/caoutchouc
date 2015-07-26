@@ -46,4 +46,17 @@ describe Caoutchouc::Elasticsearch::Settings do
       res.transient.should_not be_nil
     end
   end
+
+  describe "#flat" do
+    it "flattens simple keys" do
+      res = Caoutchouc::Elasticsearch::Settings.from_json(%({
+        "one": {
+          "two": {
+            "three": "yay"
+          }
+        }
+      }))
+      res.flat.to_json.should eq(%({"one.two.three":"yay"}))
+    end
+  end
 end

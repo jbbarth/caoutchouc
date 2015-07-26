@@ -19,6 +19,26 @@ module Caoutchouc
       def to_pretty_json
         @json.to_pretty_json
       end
+
+      # TODO: move it elsewhere?
+      def flatten(json_tree, prefix = nil)
+        res = {} of String => JSON::Type
+
+        json_tree.each do |key, value|
+          new_key = prefix ? "#{prefix}.#{key}" : key
+          if value.is_a?(Hash)
+            res.merge!(flatten(value, new_key))
+          else
+            res[new_key] = value
+          end
+        end
+
+        res
+      end
+
+      def flat
+        flatten(@json)
+      end
     end
   end
 end
