@@ -1,4 +1,5 @@
 require "readline"
+require "signal"
 require "./shell/*"
 
 module Caoutchouc
@@ -7,6 +8,7 @@ module Caoutchouc
 
     def main_loop
       Autocomplete.initialize_autocomplete!
+      initialize_traps!
       puts! welcome_message
 
       loop do
@@ -38,6 +40,16 @@ module Caoutchouc
     def ctrl_d_handler
       erase_current_line
       puts! "#{prompt}exit"
+    end
+
+    def ctrl_c_handler
+      print! prompt
+    end
+
+    def initialize_traps!
+      Signal::INT.trap do
+        ctrl_c_handler
+      end
     end
 
     def welcome_message
