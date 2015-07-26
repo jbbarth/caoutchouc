@@ -69,4 +69,15 @@ describe Caoutchouc::Elasticsearch::Settings do
       )
     end
   end
+
+  describe "#with_defaults" do
+    it "includes default values in persistent settings" do
+      res = Caoutchouc::Elasticsearch::Settings.from_json(%(
+        { "persistent": {}, "transient": {} }
+      ))
+      res.with_defaults = true
+      res.persistent.keys.should contain("(default)indices.recovery.concurrent_streams")
+      res.persistent["(default)indices.recovery.concurrent_streams"].should eq("3")
+    end
+  end
 end
