@@ -29,7 +29,7 @@ module Caoutchouc
           end
         end
         if result.count > 1
-          result.insert(0, text)
+          result.insert(0, common_denominator(result))
         end
         return result
       end
@@ -49,6 +49,17 @@ module Caoutchouc
           command_name = text.split.first
           Command.find(command_name)
         end
+      end
+
+      def common_denominator(results : Array(String))
+        candidate = text
+        max_size = results.map(&.length).min
+        (text.length..max_size).each do |size|
+          if results.map{|res| res[0..size]}.uniq.length == 1
+            candidate = results[0][0..size]
+          end
+        end
+        candidate
       end
     end
   end

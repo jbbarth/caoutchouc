@@ -16,6 +16,11 @@ describe Caoutchouc::Shell::Autocomplete do
       it "returns nothing if unknown command" do
         AC.new("does-not-exist", buffer: "does-not-exist").complete.should eq([] of String)
       end
+
+      it "completes the command up to where possible" do
+        possibilities = AC.new("set", buffer: "").complete
+        possibilities[0].should eq("settings")
+      end
     end
 
     context "for arguments" do
@@ -23,6 +28,21 @@ describe Caoutchouc::Shell::Autocomplete do
         AC.new("", buffer: "help", start: 4).complete.should eq([] of String)
         AC.new("foo", buffer: "help foo", start: 5).complete.should eq([] of String)
         AC.new("foo", buffer: "unknown-command foo", start: 16).complete.should eq([] of String)
+      end
+    end
+
+    context "#common_denominator" do
+      it "completes up to the smaller common denominator" do
+        tests = [
+          { text: "", candidates: ["foo", "bar"], result: "" },
+          { text: "", candidates: ["foom", "foozr"], result: "foo" },
+          { text: "f", candidates: ["foo", "fogz"], result: "fo" },
+          { text: "foo", candidates: ["foo", "fooz"], result: "foo" },
+        ]
+        tests.each do |hsh|
+          ac = AC.new(hsh[:text] as String, buffer: "")
+          ac.common_denominator(hsh[:candidates] as Array(String)).should eq(hsh[:result])
+        end
       end
     end
   end
