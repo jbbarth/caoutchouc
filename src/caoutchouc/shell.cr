@@ -14,8 +14,7 @@ module Caoutchouc
 
         # Ctrl-D
         if input.nil?
-          erase_current_line
-          puts! "#{prompt}exit"
+          ctrl_d_handler
           exit
         end
 
@@ -34,6 +33,11 @@ module Caoutchouc
           puts! "Unrecognized command: #{command_name}"
         end
       end
+    end
+
+    def ctrl_d_handler
+      erase_current_line
+      puts! "#{prompt}exit"
     end
 
     def welcome_message
