@@ -47,16 +47,26 @@ describe Caoutchouc::Elasticsearch::Settings do
     end
   end
 
-  describe "#flat" do
+  describe "#flatten" do
     it "flattens simple keys" do
-      res = Caoutchouc::Elasticsearch::Settings.from_json(%({
-        "one": {
-          "two": {
-            "three": "yay"
-          }
+      res = Caoutchouc::Elasticsearch::Settings.flatten(
+        { "one" => { "two" => { "three" => "yay" } } }
+      )
+      res.to_json.should eq(%({"one.two.three":"yay"}))
+    end
+  end
+
+  describe "#flat" do
+    it "preserves transient/persistent top-level keys" do
+      res = Caoutchouc::Elasticsearch::Settings.from_json(%(
+        {
+          "persistent": { "one": { "two": { "three": "yay" } } },
+          "transient": { "four": { "five": "foo" } }
         }
-      }))
-      res.flat.to_json.should eq(%({"one.two.three":"yay"}))
+      ))
+      res.flat.to_json.should eq(
+        %({"persistent":{"one.two.three":"yay"},"transient":{"four.five":"foo"}})
+      )
     end
   end
 end

@@ -21,9 +21,10 @@ module Caoutchouc
       end
 
       # TODO: move it elsewhere?
-      def flatten(json_tree, prefix = nil)
+      def self.flatten(json_tree, prefix = nil)
         res = {} of String => JSON::Type
 
+        json_tree = json_tree as Hash
         json_tree.each do |key, value|
           new_key = prefix ? "#{prefix}.#{key}" : key
           if value.is_a?(Hash)
@@ -37,7 +38,10 @@ module Caoutchouc
       end
 
       def flat
-        flatten(@json)
+        {
+          "persistent" => self.class.flatten(persistent),
+          "transient"  => self.class.flatten(transient),
+        }
       end
     end
   end
