@@ -23,6 +23,22 @@ caoutchouc <address>
 
 Then `help` for commands.
 
+## Development
+
+When developing, it can be useful to rerun specs as soon as some ".cr" file
+changes. Everybody has her own thing to do that, but I find that the "rerun"
+ruby gem is really flexible and simple.
+
+To install it:
+```
+gem install rerun
+```
+
+To use it in the context of this project (or any Crystal project really):
+```
+rerun --clear --exit --pattern "**/*.cr" crystal spec
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/[your-github-name]/caoutchouc/fork )
