@@ -104,6 +104,23 @@ module Caoutchouc
           "transient"  => self.class.flatten(transient),
         }
       end
+
+      def flat_pretty_json
+        result = flat.to_pretty_json.gsub(/"\(default\)(.+)": (.+)\n/) do |str, match|
+          grey(%["#{match[1]}": #{match[2]}])+"\n"
+        end
+        if with_defaults
+          result += "\n"
+          result += grey(
+            "NB: values in grey were not set, the value displayed are default ones as of ES 1.7.0"
+          )
+        end
+        result
+      end
+
+      def grey(txt)
+        Colorize::Object.new(txt).fore(:black).back(:dark_gray).to_s
+      end
     end
   end
 end

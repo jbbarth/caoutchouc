@@ -9,7 +9,7 @@ module Caoutchouc
     end
 
     def run
-      puts! client.settings.flat.to_pretty_json
+      puts! client.settings.flat_pretty_json
     end
   end
 

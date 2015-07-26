@@ -11,7 +11,7 @@ module Caoutchouc
     def run
       settings = client.settings
       settings.with_defaults = true
-      puts! settings.flat.to_pretty_json
+      puts! settings.flat_pretty_json
     end
   end
 
