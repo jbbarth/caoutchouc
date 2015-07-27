@@ -43,6 +43,9 @@ module Caoutchouc
     end
 
     def ctrl_c_handler
+      print! "\n"
+      Readline.replace_line("")
+      Readline.redisplay
       print! prompt
     end
 
