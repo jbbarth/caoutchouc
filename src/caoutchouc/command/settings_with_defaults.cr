@@ -5,7 +5,7 @@ module Caoutchouc
     end
 
     def short_doc
-      "GET /_cluster/settings + include default values for some important settings"
+      "GET /_cluster/settings + include default values for some important settings (will be displayed in grey)"
     end
 
     def run

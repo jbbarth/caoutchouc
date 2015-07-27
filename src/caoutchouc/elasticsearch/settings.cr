@@ -107,17 +107,9 @@ module Caoutchouc
       end
 
       def flat_pretty_json
-        result = flat.to_pretty_json.gsub(/"\(default\)(.+)": (.+)\n/) do |str, match|
+        flat.to_pretty_json.gsub(/"\(default\)(.+)": (.+)\n/) do |str, match|
           grey(%["#{match[1]}": #{match[2]}])+"\n"
         end
-        if with_defaults
-          STDERR.print grey(
-            "NB: values in grey were not set, the value displayed are default ones as of ES 1.7.0"
-          )
-          STDERR.print "\n"
-          STDERR.flush
-        end
-        result
       end
 
       def grey(txt)
