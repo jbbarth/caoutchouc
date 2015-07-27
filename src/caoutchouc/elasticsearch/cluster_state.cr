@@ -3,7 +3,7 @@ module Caoutchouc
     class ClusterState
       json_mapping({
         cluster_name: {type: String},
-        version: {type: Int32},
+        version: {type: Int32, nilable: true},
         master_node: {type: String},
         blocks: {type: JSON::Any},
         nodes: {type: Hash(String, ClusterStateNode)},
