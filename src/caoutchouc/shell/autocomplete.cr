@@ -25,7 +25,7 @@ module Caoutchouc
         result = [] of String
         Command.all.each do |cmd|
           if cmd.name.starts_with?(text)
-            result << "#{cmd.name} "
+            result << cmd.name
           end
         end
         if result.count > 1
