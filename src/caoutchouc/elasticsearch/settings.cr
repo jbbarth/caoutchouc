@@ -57,8 +57,9 @@ module Caoutchouc
           return @json_with_defaults unless @json_with_defaults.empty?
           @json_with_defaults = @json.clone
           DEFAULTS.each do |setting, default_value|
-            pers = @json["persistent"] as Hash #help the compiler
-            if ! pers.has_key?(setting)
+            pers = self.class.flatten(@json["persistent"]) as Hash #help the compiler
+            trans = self.class.flatten(@json["transient"]) as Hash #help the compiler
+            if ! pers.has_key?(setting) && ! trans.has_key?(setting)
               new_pers = @json_with_defaults["persistent"] as Hash #help the compiler
               new_pers["(default)#{setting}"] = default_value
             end

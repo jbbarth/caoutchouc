@@ -79,5 +79,21 @@ describe Caoutchouc::Elasticsearch::Settings do
       res.persistent.keys.should contain("(default)indices.recovery.concurrent_streams")
       res.persistent["(default)indices.recovery.concurrent_streams"].should eq("3")
     end
+
+    it "doesn't include values that are already present in persistent settings" do
+      res = Caoutchouc::Elasticsearch::Settings.from_json(%(
+        { "persistent": { "indices":{"recovery":{"concurrent_streams": "foo"}} }, "transient": {} }
+      ))
+      res.with_defaults = true
+      res.persistent.keys.should_not contain("(default)indices.recovery.concurrent_streams")
+    end
+
+    it "doesn't include values that are already present in transient settings" do
+      res = Caoutchouc::Elasticsearch::Settings.from_json(%(
+        { "transient": { "indices": {"recovery": {"concurrent_streams": "foo"}}}, "persistent": {} }
+      ))
+      res.with_defaults = true
+      res.persistent.keys.should_not contain("(default)indices.recovery.concurrent_streams")
+    end
   end
 end
