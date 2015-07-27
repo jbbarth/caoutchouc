@@ -3,6 +3,7 @@
 /.crystal/
 /doc/
 /bc_flags
+/build
 /caoutchouc.o
 /caoutchouc
 /tmp

@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+cd $(dirname $0)/..
+
+rm -f caoutchouc caoutchouc.o
+
+command=$(crystal build src/caoutchouc.cr --release \
+  --cross-compile "Linux x86_64" --target "x86_64-unknown-linux-gnu")
+
+docker build -t caoutchouc -f Dockerfile.build .
+
+docker run -v $(pwd):/code caoutchouc $command
+
+rm -f caoutchouc.o
+
+mv caoutchouc build/caoutchouc.linux

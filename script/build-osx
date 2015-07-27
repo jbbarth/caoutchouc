@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+if [[ "$OSTYPE" != "darwin"* ]]; then
+  echo "This script only targets Mac OSX" >&2
+  exit 1
+fi
+
+cd $(dirname $0)/..
+
+rm -f caoutchouc caoutchouc.o
+
+crystal build src/caoutchouc.cr --release
+
+rm -f caoutchouc.o
+
+mv caoutchouc build/caoutchouc.osx

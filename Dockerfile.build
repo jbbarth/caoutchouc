@@ -1,0 +1,19 @@
+FROM ubuntu:14.04
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN mkdir /code
+WORKDIR /code
+
+RUN apt-key adv --keyserver keys.gnupg.net --recv-keys 09617FD37CC06B54
+RUN echo "deb http://dist.crystal-lang.org/apt crystal main" > /etc/apt/sources.list.d/crystal.list
+RUN apt-get update
+RUN apt-get install -y gcc make build-essential curl \
+  libssl-dev libcrypto++-dev libreadline-dev libevent-dev \
+  libpcre3-dev libgc-dev libunwind8-dev libgmp3-dev crystal
+
+#from crystal's .travis.yml file ; esp. libpcl provided by ubuntu is too old
+RUN curl "http://crystal-lang.s3.amazonaws.com/llvm/llvm-3.5.0-1-linux-x86_64.tar.gz" | tar xz -C /tmp \
+  && mv /tmp/llvm-3.5.0-1/bin/* /usr/local/bin/
+RUN curl "http://crystal-lang.s3.amazonaws.com/pcl/libpcl-1.12-1-linux-x86_64.tar.gz" | tar xz -C /tmp
+ENV LIBRARY_PATH /opt/crystal/embedded/lib:/tmp/libpcl-1.12-1/lib
