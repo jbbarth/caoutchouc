@@ -111,8 +111,9 @@ module Caoutchouc
         end
         if with_defaults
           STDERR.print grey(
-            "NB: values in grey were not set, the value displayed are default ones as of ES 1.7.0\n"
+            "NB: values in grey were not set, the value displayed are default ones as of ES 1.7.0"
           )
+          STDERR.print "\n"
           STDERR.flush
         end
         result
