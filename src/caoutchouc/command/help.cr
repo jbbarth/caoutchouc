@@ -11,8 +11,9 @@ module Caoutchouc
     end
 
     def run
+      max_length = Command.all.map(&.name.length).max
       Command.all.sort_by(&.name).each do |cmd|
-        puts! " #{cmd.name.ljust(12)}  -- #{cmd.short_doc}"
+        puts! " #{cmd.name.ljust(max_length + 2)}  -- #{cmd.short_doc}"
       end
     end
   end
