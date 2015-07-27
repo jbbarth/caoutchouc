@@ -15,6 +15,20 @@ mkdir -p ~/bin
 crystal build src/caoutchouc.cr -o ~/bin/caoutchouc
 ```
 
+**WARNING FOR OSX USERS**
+
+On OSX the `readline` version that comes with OSX/Xcode is basically fucked.
+For instance it doesn't contain any mean to manipulate the current line buffer,
+say, when a Ctrl+C (SIGINT) occurs. Hence this software *won't compile* with
+those readline versions, and you're encouraged to install a proper readline,
+for instance via Homebrew (`brew install readline`). After that, add your
+readline path to the `LIBRARY_PATH` environment variable so it takes precedence
+over Xcode's one:
+```
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/Cellar/readline/6.3.8/lib/
+#then: crystal run / crystal build
+```
+
 ## Usage
 
 ```
