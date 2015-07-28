@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+#SAFEGUARDS
+
 if test -z "$GITHUB_TOKEN"; then
   echo "GITHUB_TOKEN not set, github-release won't be able to create a release, exiting..." >&2
   exit 1
@@ -31,28 +33,9 @@ if ! which github-release >/dev/null; then
   exit 1
 fi
 
-cd $(dirname $0)/..
-
-echo "BUILDING FOR MAC OSX"
-./script/build-osx
-
-echo "BUILDING FOR LINUX"
-./script/build-linux
-
-echo "TAGGING $tag"
-git tag $tag && git push --tags
-
-echo "CREATING GH RELEASE"
-github-release release \
-    --user jbbarth \
-    --repo caoutchouc \
-    --tag $tag \
-    --description "$description"
-    #--name "the wolf of source street" \
-    #--pre-release
-
+# UTILITY FUNCTIONS
 upload() {
-  echo "UPLOADING $1"
+  step "UPLOADING $1"
   github-release upload \
       --user jbbarth \
       --repo caoutchouc \
@@ -60,6 +43,48 @@ upload() {
       --name "$1" \
       --file "$2"
 }
+step() {
+  echo
+  echo "* $*"
+  echo "* $*"|perl -pe 's/./-/g'
+}
+
+cd $(dirname $0)/..
+
+step "UPDATING README"
+cat README.md | \
+  perl -pe "s#github.com/jbbarth/caoutchouc/download/.*?/#github.com/jbbarth/caoutchouc/download/$tag/#" | \
+  tee README.md.new >/dev/null
+mv -f README.md.new README.md
+git add README.md
+
+step "UPDATING VERSION FILE"
+cat src/caoutchouc/version.cr | \
+  perl -pe "s#VERSION.*#VERSION = \"${tag/v}\"#" | \
+  tee src/caoutchouc/version.cr.new >/dev/null
+mv -f src/caoutchouc/version.cr.new src/caoutchouc/version.cr
+git add src/caoutchouc/version.cr
+
+step "BUILDING FOR MAC OSX"
+./script/build-osx
+
+step "BUILDING FOR LINUX"
+./script/build-linux
+
+step "COMMIT"
+git commit -m "Bump version to $tag"
+
+step "TAGGING $tag"
+git tag $tag && git push --tags
+
+step "CREATING GH RELEASE"
+github-release release \
+    --user jbbarth \
+    --repo caoutchouc \
+    --tag $tag \
+    --description "$description"
+    #--name "the wolf of source street" \
+    #--pre-release
 
 upload caoutchouc_linux-amd64 build/caoutchouc_linux-amd64
 upload caoutchouc_linux-amd64.md5 build/caoutchouc_linux-amd64.md5
