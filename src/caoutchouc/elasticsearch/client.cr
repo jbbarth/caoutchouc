@@ -77,7 +77,6 @@ module Caoutchouc
       end
 
       private def get(endpoint)
-        puts "Will GET #{location}#{endpoint}"
         HTTP::Client.get("#{location}#{endpoint}")
       end
     end
