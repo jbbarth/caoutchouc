@@ -18,7 +18,7 @@ describe Caoutchouc::Shell::Autocomplete do
       end
 
       it "completes the command up to where possible" do
-        possibilities = AC.new("set", buffer: "").complete
+        possibilities = AC.new("set", buffer: "set").complete
         possibilities[0].should eq("settings")
       end
     end
