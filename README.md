@@ -1,6 +1,8 @@
 Caoutchouc: a shell for Elasticsearch
 =====================================
 
+[![Travis CI](https://secure.travis-ci.org/jbbarth/caoutchouc.png)](http://travis-ci.org/jbbarth/caoutchouc)
+
 `caoutchouc` is an interactive shell specifically targeted at managing
 Elasticsearch. It especially focuses on making cumbersome tasks easier.
 
