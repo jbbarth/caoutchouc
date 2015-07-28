@@ -13,7 +13,7 @@ module Caoutchouc
         STDERR.flush
         exit 1
       end
-      Caoutchouc::Elasticsearch.set_location(args)
+      Caoutchouc::Elasticsearch.set_location(args.first)
       main_loop()
     end
   end

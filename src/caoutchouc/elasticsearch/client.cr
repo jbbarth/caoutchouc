@@ -15,7 +15,7 @@ module Caoutchouc
 
     class Client
 
-      getter :location, :secondary_locations
+      getter :location
 
       def initialize()
         if ENV.has_key?("CAOUTCHOUC_ES_LOCATION")
@@ -23,18 +23,13 @@ module Caoutchouc
         else
           @location = "http://localhost:9200"
         end
-        @secondary_locations = [] of String
       end
 
       def initialize(nil)
         initialize
       end
 
-      def initialize(addresses : String | Array(String))
-        addresses = [addresses] if addresses.is_a?(String)
-
-        @location = addresses.shift
-        @secondary_locations = addresses
+      def initialize(@location : String)
       end
 
       def health : Health
