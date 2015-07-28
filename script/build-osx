@@ -14,4 +14,5 @@ crystal build src/caoutchouc.cr --release
 
 rm -f caoutchouc.o
 
-mv caoutchouc build/caoutchouc.osx
+mv caoutchouc build/caoutchouc_darwin-amd64
+md5 -q build/caoutchouc_darwin-amd64 > build/caoutchouc_darwin-amd64.md5

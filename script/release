@@ -1,0 +1,67 @@
+#!/bin/bash
+set -e
+
+if test -z "$GITHUB_TOKEN"; then
+  echo "GITHUB_TOKEN not set, github-release won't be able to create a release, exiting..." >&2
+  exit 1
+fi
+
+if test -z "$1"; then
+  echo "Usage: $0 <tag> [description]" >&2
+  exit 1
+fi
+tag=$1
+shift
+description="$*"
+
+# the script currently assumes we release from an OSX machine
+# change it later if needed...
+if [[ "$OSTYPE" != "darwin"* ]]; then
+  echo "Not on an OSX machine, exiting..." >&2
+  exit 1
+fi
+
+if ! which docker >/dev/null; then
+  echo "Missing docker binary, exiting..." >&2
+  exit 1
+fi
+
+if ! which github-release >/dev/null; then
+  echo "Missing github-release binary, exiting..." >&2
+  exit 1
+fi
+
+cd $(dirname $0)/..
+
+echo "BUILDING FOR MAC OSX"
+./script/build-osx
+
+echo "BUILDING FOR LINUX"
+./script/build-linux
+
+echo "TAGGING $tag"
+git tag $tag && git push --tags
+
+echo "CREATING GH RELEASE"
+github-release release \
+    --user jbbarth \
+    --repo caoutchouc \
+    --tag $tag \
+    --description "$description"
+    #--name "the wolf of source street" \
+    #--pre-release
+
+upload() {
+  echo "UPLOADING $1"
+  github-release upload \
+      --user jbbarth \
+      --repo caoutchouc \
+      --tag $tag \
+      --name "$1" \
+      --file "$2"
+}
+
+upload caoutchouc_linux-amd64 build/caoutchouc_linux-amd64
+upload caoutchouc_linux-amd64.md5 build/caoutchouc_linux-amd64.md5
+upload caoutchouc_darwin-amd64 build/caoutchouc_darwin-amd64
+upload caoutchouc_darwin-amd64.md5 build/caoutchouc_darwin-amd64.md5
