@@ -17,6 +17,8 @@ def with_env(key, value : Nil|String, &block)
   ensure
     if old_value
       ENV[key] = old_value
+    else
+      ENV.delete(key)
     end
   end
 end
