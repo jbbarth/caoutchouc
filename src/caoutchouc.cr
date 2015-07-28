@@ -7,7 +7,6 @@ module Caoutchouc
 
     def initialize(args)
       debug "Observing cluster at: #{args.inspect}"
-      puts STDIN.tty?
       if args.size == 0
         location = "http://localhost:9200"
       else
