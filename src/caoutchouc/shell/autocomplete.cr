@@ -40,7 +40,7 @@ module Caoutchouc
       end
 
       private def beginning_of_line?
-        position == 0
+        text == buffer
       end
 
       private def find_command : Command|Nil
