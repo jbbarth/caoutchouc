@@ -5,7 +5,34 @@ Caoutchouc: a shell for managing Elasticsearch
 
 ## Installation
 
-There will soon be binary packages, but for now you have to compile the project
+Go download the correct version of the tool on the [releases page](https://github.com/jbbarth/caoutchouc/releases).
+
+If you better like command-line, here we go:
+
+... for Linux 64bits users:
+```
+curl -L https://github.com/jbbarth/caoutchouc/download/foo/caoutchouc_linux-amd64 > /usr/local/bin/caoutchouc
+chmod +x /usr/local/bin/caoutchouc
+```
+
+... for Mac OSX users:
+```
+curl -L https://github.com/jbbarth/caoutchouc/download/foo/caoutchouc_darwin-amd64 > /usr/local/bin/caoutchouc
+chmod +x /usr/local/bin/caoutchouc
+```
+
+## Usage
+
+```
+caoutchouc <address>
+```
+
+Then `help` for commands.
+
+## Development
+
+If you want to build this project yourself (for development purposes, no need
+if you just want to use it!!), you may have to compile the project
 yourself:
 1. [install crystal](http://crystal-lang.org/docs/installation/index.html)
 2. clone this repository and go into the resulting directory
@@ -29,15 +56,7 @@ export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/Cellar/readline/6.3.8/lib/
 #then: crystal run / crystal build
 ```
 
-## Usage
-
-```
-caoutchouc <address>
-```
-
-Then `help` for commands.
-
-## Development
+**Running specs**
 
 When developing, it can be useful to rerun specs as soon as some ".cr" file
 changes. Everybody has her own thing to do that, but I find that the "rerun"
