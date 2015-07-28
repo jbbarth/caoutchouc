@@ -17,7 +17,6 @@ describe Caoutchouc::Elasticsearch::Client do
     it "accepts a single string" do
       client = ESClient.new("foo")
       client.location.should eq("foo")
-      client.secondary_locations.should eq([] of String)
     end
   end
 end
