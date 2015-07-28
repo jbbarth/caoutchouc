@@ -11,13 +11,13 @@ If you better like command-line, here we go:
 
 ... for Linux 64bits users:
 ```
-curl -L https://github.com/jbbarth/caoutchouc/download/foo/caoutchouc_linux-amd64 > /usr/local/bin/caoutchouc
+curl -L https://github.com/jbbarth/caoutchouc/download/v0.1/caoutchouc_linux-amd64 > /usr/local/bin/caoutchouc
 chmod +x /usr/local/bin/caoutchouc
 ```
 
 ... for Mac OSX users:
 ```
-curl -L https://github.com/jbbarth/caoutchouc/download/foo/caoutchouc_darwin-amd64 > /usr/local/bin/caoutchouc
+curl -L https://github.com/jbbarth/caoutchouc/download/v0.1/caoutchouc_darwin-amd64 > /usr/local/bin/caoutchouc
 chmod +x /usr/local/bin/caoutchouc
 ```
 
