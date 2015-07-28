@@ -25,9 +25,9 @@ describe Caoutchouc::Shell::Autocomplete do
 
     context "for arguments" do
       it "returns nothing (for now) if command is already set" do
-        AC.new("", buffer: "help", start: 4).complete.should eq([] of String)
-        AC.new("foo", buffer: "help foo", start: 5).complete.should eq([] of String)
-        AC.new("foo", buffer: "unknown-command foo", start: 16).complete.should eq([] of String)
+        AC.new("", buffer: "help", position: 4).complete.should eq([] of String)
+        AC.new("foo", buffer: "help foo", position: 5).complete.should eq([] of String)
+        AC.new("foo", buffer: "unknown-command foo", position: 16).complete.should eq([] of String)
       end
     end
 

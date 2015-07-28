@@ -1,16 +1,17 @@
 module Caoutchouc
   module Shell
     class Autocomplete
-      getter :text, :start, :finish, :buffer
+      getter :text, :position, :buffer
 
       def self.initialize_autocomplete!
-        Readline.autocomplete do |text, start, finish|
-          new(text, start: start, finish: finish).complete
+        Readline.autocomplete do |text|
+          new(text).complete
         end
       end
 
-      def initialize(@text, @start = 0, @finish = 0, @buffer = nil)
+      def initialize(@text, @position = nil, @buffer = nil)
         @buffer ||= Readline.line_buffer
+        @position ||= Readline.point
       end
 
       def complete : Array(String)
@@ -39,7 +40,7 @@ module Caoutchouc
       end
 
       private def beginning_of_line?
-        start == 0
+        position == 0
       end
 
       private def find_command : Command|Nil
