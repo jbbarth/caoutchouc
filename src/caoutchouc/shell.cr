@@ -7,6 +7,14 @@ module Caoutchouc
     include Utils
 
     def main_loop
+      if interactive?
+        main_loop_interactive
+      else
+        main_loop_from_stdin
+      end
+    end
+
+    def main_loop_interactive
       Autocomplete.initialize_autocomplete!
       initialize_traps!
       puts! welcome_message
@@ -33,6 +41,23 @@ module Caoutchouc
           command.run
         else
           puts! "Unrecognized command: #{command_name}"
+        end
+      end
+    end
+
+    def main_loop_from_stdin
+      STDIN.read.lines.each do |line|
+        input = line.chomp
+
+        next if input == ""
+
+        # here we have a command to work on
+        command_name = input.split.first
+        if command = Command.find(command_name)
+          command.run
+        else
+          STDERR.puts "Unrecognized command: #{command_name}"
+          STDERR.flush
         end
       end
     end
@@ -72,6 +97,10 @@ module Caoutchouc
 
     def client
       Elasticsearch.client
+    end
+
+    def interactive?
+      STDIN.tty?
     end
   end
 end
