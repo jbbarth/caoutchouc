@@ -73,6 +73,7 @@ step "BUILDING FOR LINUX"
 
 step "COMMIT"
 git commit -m "Bump version to $tag"
+git push origin master
 
 step "TAGGING $tag"
 git tag $tag && git push --tags
