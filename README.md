@@ -13,13 +13,13 @@ If you better like command-line, here we go:
 
 ... for Linux 64bits users:
 ```
-sudo curl -L https://github.com/jbbarth/caoutchouc/download/v0.0.2/caoutchouc_linux-amd64 -o /usr/local/bin/caoutchouc
+sudo curl -L https://github.com/jbbarth/caoutchouc/releases/download/v0.0.2/caoutchouc_linux-amd64 -o /usr/local/bin/caoutchouc
 sudo chmod +x /usr/local/bin/caoutchouc
 ```
 
 ... for Mac OSX users:
 ```
-sudo curl -L https://github.com/jbbarth/caoutchouc/download/v0.0.2/caoutchouc_darwin-amd64 -o /usr/local/bin/caoutchouc
+sudo curl -L https://github.com/jbbarth/caoutchouc/releases/download/v0.0.2/caoutchouc_darwin-amd64 -o /usr/local/bin/caoutchouc
 sudo chmod +x /usr/local/bin/caoutchouc
 ```
 

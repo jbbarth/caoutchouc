@@ -53,7 +53,7 @@ cd $(dirname $0)/..
 
 step "UPDATING README"
 cat README.md | \
-  perl -pe "s#github.com/jbbarth/caoutchouc/download/.*?/#github.com/jbbarth/caoutchouc/download/$tag/#" | \
+  perl -pe "s#(github.com/jbbarth/caoutchouc/releases/download)/.*?/#\$1/$tag/#" | \
   tee README.md.new >/dev/null
 mv -f README.md.new README.md
 git add README.md
